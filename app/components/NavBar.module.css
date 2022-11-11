@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: .5rem 1rem;
+}
+
+.logo {
+  padding: 1rem;
+  font-size: larger;
+}
+
+.links {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: center;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  padding-inline-start: 0;
+}
+
+.links li {
+  list-style: none;
+  margin: .5rem;
+}
