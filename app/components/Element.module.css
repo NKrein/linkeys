@@ -1,0 +1,7 @@
+.container {
+  position: relative;
+}
+
+.container:hover {
+  box-shadow: 0px 0px 10px 2px gold;
+}
