@@ -1,7 +1,9 @@
 'use client'
 import { nanoid } from "nanoid"
 import { useState } from "react"
+import EditMenu from "../components/EditMenu"
 import Placeholder from "../components/Placeholder"
+import style from "./page.module.css"
 
 const Create = () => {
   const defaultElements = [
@@ -13,12 +15,11 @@ const Create = () => {
         justifyContent: 'space-around',
         alignContent: 'space-around',
         alignItems: 'center',
-        background: 'rgba(0, 0, 0, 0.3)',
+        background: '#BFBFBF',
         padding: '1rem',
         height: 'auto',
         width: '100%',
-        position: 'relative',
-        zIndex: 'auto'
+
       },
       elements: [
         {
@@ -40,39 +41,51 @@ const Create = () => {
     }
   ]
   const [placeholders, setPlaceholders] = useState(defaultElements)
+  const [optionMenu, setOptionMenu] = useState({ id: '', menuList: [], styleList: {} })
 
-  const handlerAddPlaceholder = (id) => {
-    if (id) {
-
-    } else {
-      const newPlaceholder = {
-        id: nanoid(),
-        style: {
-          display: 'flex',
-          flexFlow: 'row nowrap',
-          justifyContent: 'space-around',
-          alignContent: 'space-around',
-          alignItems: 'center',
-          background: 'rgba(0, 0, 0, 0.3)',
-          padding: '1rem',
-          margin: '1rem',
-          height: 'auto',
-          width: '100%',
-          position: 'relative',
-          zIndex: 'auto'
-        },
-        elements: []
-      }
-
+  const handlerOpenMenu = (id, menuList, styleList) => {
+    const newMenuOptions = {
+      id: id,
+      menuList,
+      styleList
     }
+    setOptionMenu(newMenuOptions)
+  }
+
+  const handlerAddPlaceholder = () => {
+    const newPlaceholder = {
+      id: nanoid(),
+      style: {
+        display: 'flex',
+        flexFlow: 'row nowrap',
+        justifyContent: 'space-around',
+        alignContent: 'space-around',
+        alignItems: 'center',
+        background: '#BFBFBF',
+        padding: '1rem',
+        height: '10vh',
+        width: '100%',
+
+      },
+      elements: []
+    }
+    setPlaceholders([...placeholders, newPlaceholder])
   }
 
   return (
     <>
       <h2>Create</h2>
-      <div>
-        {placeholders.map(item => <Placeholder key={item.id} item={item} />)}
+      <div className={style.placeholdersContainer}>
+        {placeholders.map(item => <Placeholder key={item.id} item={item} handlerOpenMenu={handlerOpenMenu} idSelected={optionMenu.id}/>)}
+        <div className={style.addButtonContainer}>
+          <button type="button" onClick={handlerAddPlaceholder} className={style.addButton}>
+            <img src="/icons/addIcon.png" alt="add button" />
+          </button>
+        </div>
       </div>
+      {optionMenu.id &&
+        <EditMenu menuList={optionMenu.menuList} styleList={optionMenu.styleList} handlerCloseMenu={() => setOptionMenu({ id: '', menuList: [], styleList: {} })}/>
+      }
     </>
 
   )

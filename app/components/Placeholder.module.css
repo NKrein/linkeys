@@ -1,8 +1,38 @@
 .container {
-  position: 'relative';
-  z-index: 'auto';
+  position: relative;
+  z-index: 1;
+  transition: .5s;
 }
 
 .container:hover {
   box-shadow: 0px 0px 10px 2px gold;
+  transition: .5s; 
+}
+
+.addButton {
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  position: absolute;
+  transition: 1s;
+}
+
+.leftAddButton {
+  left: 0rem;
+}
+
+.rightAddButton {
+  right: 0rem;
+}
+
+.addButton:hover {
+  filter: drop-shadow(2px 5px 1px rgba(0, 0, 0, 0.2));
+  transform: translate(-2px);
+  transition: .5s;
+  cursor: pointer;
+}
+
+.addButton img {
+  width: 2rem;
+  z-index: 2;
 }

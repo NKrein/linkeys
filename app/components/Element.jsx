@@ -4,10 +4,9 @@ import EditMenuButton from "./EditMenuButton"
 import { useState } from "react"
 import { nanoid } from "nanoid"
 
-const Element = ({ item }) => {
+const Element = ({ idSelected, item, handlerOpenMenu }) => {
 
   const [showOptionBtn, setShowOptionBtn] = useState(false)
-  const [showOptionMenu, setShowOptionMenu] = useState(false)
 
   const EditMenuItems = [
     {
@@ -45,8 +44,7 @@ const Element = ({ item }) => {
       className={style.container}
       onMouseEnter={() => setShowOptionBtn(true)}
       onMouseLeave={() => setShowOptionBtn(false)}
-      onClick={(e) => { e.stopPropagation(); setShowOptionMenu(false) }}
-      onKeyDown={(e) => { if (e.key === 'Escape') setShowOptionMenu(false) }}
+      style={{border: idSelected === item.id ? '3px inset gold' : 'none' }}
     >
       {item.children
         ? <item.type {...item.props}>{item.children}</item.type>
@@ -54,9 +52,10 @@ const Element = ({ item }) => {
       }
       {showOptionBtn &&
         <EditMenuButton
+          id={item.id}
           menuList={EditMenuItems}
-          showMenu={showOptionMenu}
-          handlerOpenMenu={(e) => { e.stopPropagation(); setShowOptionMenu(!showOptionMenu) }}
+          styleList={item.props.style}
+          handlerOpenMenu={handlerOpenMenu}
         />}
     </div>
   )

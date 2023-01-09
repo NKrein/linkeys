@@ -1,0 +1,30 @@
+.addButtonContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.addButton {
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  position: relative;
+  bottom: 1rem;
+  transition: 1s;
+}
+
+.addButton img {
+  width: 3rem;
+  z-index: 2;
+}
+
+.addButton:hover {
+  bottom: 0;
+  filter: drop-shadow(2px 5px 1px rgba(0, 0, 0, 0.2));
+  transform: translate(-2px);
+  transition: .5s;
+  cursor: pointer;
+}
+
+.placeholdersContainer {
+  overflow-y: scroll;
+}
